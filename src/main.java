@@ -4,5 +4,7 @@ public class main {
 
         InputHandler myParser = new InputHandler();
         myParser.readInput("src\\test.txt");
+
+        System.out.println(myParser.toString());
     }
 }
