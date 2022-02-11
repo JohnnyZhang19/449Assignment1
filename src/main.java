@@ -5,7 +5,7 @@ public class main {
     public static void main(String[] args) {
 
         InputHandler myParser = new InputHandler();
-        myParser.readInput("src\\test.txt");
+        myParser.readInput("src\\test2.txt");
         // System.out.println(myParser.toString());
 
         MNode root = new MNode();
@@ -13,5 +13,7 @@ public class main {
 
         ArrayList<Integer> used = new ArrayList<Integer>();
         myTree.makeTree(root, myParser, 0);
+
+        System.out.println(myTree.getBest());
     }
 }

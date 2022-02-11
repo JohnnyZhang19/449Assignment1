@@ -159,6 +159,75 @@ public class ConstraintHandler {
         return true;
     }
 
+    // Too-near task with pair
+    public boolean tooNearTask(int node, int parent, ArrayList<ArrayList<String>> pairs) {
+
+        String node_task = "";
+        String parent_task = "";
+
+        // change parent task to letters
+        if(node == 1) {
+            node_task = "A";
+        }
+        else if(node == 2) {
+            node_task = "B";
+        }
+        else if(node == 3) {
+            node_task = "C";
+        }
+        else if(node == 4) {
+            node_task = "D";
+        }
+        else if(node == 5) {
+            node_task = "E";
+        }
+        else if(node == 6) {
+            node_task = "F";
+        }
+        else if(node == 7) {
+            node_task = "G";
+        }
+        else if(node == 8) {
+            node_task = "H";
+        }
+        
+        // change parent task to letters
+        if(parent == 1) {
+            parent_task = "A";
+        }
+        else if(parent == 2) {
+            parent_task = "B";
+        }
+        else if(parent == 3) {
+            parent_task = "C";
+        }
+        else if(parent == 4) {
+            parent_task = "D";
+        }
+        else if(parent == 5) {
+            parent_task = "E";
+        }
+        else if(parent == 6) {
+            parent_task = "F";
+        }
+        else if(parent == 7) {
+            parent_task = "G";
+        }
+        else if(parent == 8) {
+            parent_task = "H";
+        }
+
+        // check if parent and child task match invalid pair
+        for (int i = 0; i < pairs.size(); i ++) {
+            
+            if(parent_task.equals(pairs.get(i).get(0)) && node_task.equals(pairs.get(i).get(1))) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     // Machine penalties
     public int machinePenalty(MNode node, ArrayList<ArrayList<Integer>> pairs){
 
@@ -223,6 +292,84 @@ public class ConstraintHandler {
             parent_task = "G";
         }
         else if(node.getParent().getPair().get(1) == 8) {
+            parent_task = "H";
+        }
+        
+        int index = -1;
+
+        // find the last penalty for the pair to use
+        for(int i = 0; i < TNP.size(); i++) {
+
+            if(parent_task.equals(TNP.get(i).get(0)) && node_task.equals(TNP.get(i).get(1))) {
+                index = i;
+            }
+        }
+
+        // if the pair has a penalty value
+        if(index != -1) {
+            
+            return Integer.parseInt(TNP.get(index).get(2));
+        }
+        else {
+            return 0;
+        }
+    }
+
+    // Too-near penalties with pair
+    public int tooNearPenalties(int node, int parent, ArrayList<ArrayList<String>> TNP) {
+
+        String node_task = "";
+        String parent_task = "";
+
+        // change node task to letters
+        if(node == 1) {
+            node_task = "A";
+        }
+        else if(node == 2) {
+            node_task = "B";
+        }
+        else if(node == 3) {
+            node_task = "C";
+        }
+        else if(node == 4) {
+            node_task = "D";
+        }
+        else if(node == 5) {
+            node_task = "E";
+        }
+        else if(node == 6) {
+            node_task = "F";
+        }
+        else if(node == 7) {
+            node_task = "G";
+        }
+        else if(node == 8) {
+            node_task = "H";
+        }
+
+        // change node task to letters
+        if(parent == 1) {
+            parent_task = "A";
+        }
+        else if(parent == 2) {
+            parent_task = "B";
+        }
+        else if(parent == 3) {
+            parent_task = "C";
+        }
+        else if(parent == 4) {
+            parent_task = "D";
+        }
+        else if(parent == 5) {
+            parent_task = "E";
+        }
+        else if(parent == 6) {
+            parent_task = "F";
+        }
+        else if(parent == 7) {
+            parent_task = "G";
+        }
+        else if(parent == 8) {
             parent_task = "H";
         }
         

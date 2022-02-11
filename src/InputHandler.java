@@ -14,7 +14,7 @@ public class InputHandler {
     String secondHC = "forbidden machine:";
     String thirdHC = "too-near tasks:";
     String firstSC = "machine penalties:";
-    String secondSC = "too-near penalties:";
+    String secondSC = "too-near penalities";
 
     // to keep track of how many lines are being read for machine penalties
     int mpLine = 0;
