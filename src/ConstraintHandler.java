@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class ConstraintHandler {
         
     // Forced partial assignment
-    public boolean forcedPartialAssignment(Node node, ArrayList<ArrayList<String>> pairs){
+    public boolean forcedPartialAssignment(MNode node, ArrayList<ArrayList<String>> pairs){
             
         for(int i = 0; i < pairs.size(); i++)
         {
@@ -37,7 +37,7 @@ public class ConstraintHandler {
                 nodeTask = "H";
             }
         
-            if((node.getPair().get(0) == Integer.parseInt(machineFPA) && nodeTask != taskFPA))
+            if(node.getPair().get(0) == Integer.parseInt(machineFPA) && !nodeTask.equals(taskFPA))
             {
                 return false;
             }
@@ -47,7 +47,7 @@ public class ConstraintHandler {
     }
 
     // Forbidden machine
-    public boolean forbiddenMachine(Node node, ArrayList<ArrayList<String>> pairs){
+    public boolean forbiddenMachine(MNode node, ArrayList<ArrayList<String>> pairs){
             
         for(int i = 0; i < pairs.size(); i++)
         { // cycle through list containing forbidden machine/task pairs
@@ -81,7 +81,7 @@ public class ConstraintHandler {
                 nodeTask = "H";
             }
 
-            if(Integer.parseInt(machineFB) == node.getPair().get(0) && taskFB == nodeTask)
+            if(Integer.parseInt(machineFB) == node.getPair().get(0) && taskFB.equals(nodeTask))
             {
                 return false; // if current node is forbidden, return false. false because constraint failed
             }
@@ -91,70 +91,67 @@ public class ConstraintHandler {
     }
 
     // Too-near task
-    public boolean tooNearTask(Node node,ArrayList<ArrayList<String>> pairs, Node child) {
+    public boolean tooNearTask(MNode node, ArrayList<ArrayList<String>> pairs) {
 
-        //  int parent_machine = node.getPair().get(0);
+        String node_task = "";
         String parent_task = "";
 
-        //  int child_machine = child.getPair().get(0);
-        String child_task = "";
-        
         // change parent task to letters
         if(node.getPair().get(1) == 1) {
-            parent_task = "A";
+            node_task = "A";
         }
         else if(node.getPair().get(1) == 2) {
-            parent_task = "B";
+            node_task = "B";
         }
         else if(node.getPair().get(1) == 3) {
-            parent_task = "C";
+            node_task = "C";
         }
         else if(node.getPair().get(1) == 4) {
-            parent_task = "D";
+            node_task = "D";
         }
         else if(node.getPair().get(1) == 5) {
-            parent_task = "E";
+            node_task = "E";
         }
         else if(node.getPair().get(1) == 6) {
-            parent_task = "F";
+            node_task = "F";
         }
         else if(node.getPair().get(1) == 7) {
-            parent_task = "G";
+            node_task = "G";
         }
         else if(node.getPair().get(1) == 8) {
+            node_task = "H";
+        }
+        
+        // change parent task to letters
+        if(node.getParent().getPair().get(1) == 1) {
+            parent_task = "A";
+        }
+        else if(node.getParent().getPair().get(1) == 2) {
+            parent_task = "B";
+        }
+        else if(node.getParent().getPair().get(1) == 3) {
+            parent_task = "C";
+        }
+        else if(node.getParent().getPair().get(1) == 4) {
+            parent_task = "D";
+        }
+        else if(node.getParent().getPair().get(1) == 5) {
+            parent_task = "E";
+        }
+        else if(node.getParent().getPair().get(1) == 6) {
+            parent_task = "F";
+        }
+        else if(node.getParent().getPair().get(1) == 7) {
+            parent_task = "G";
+        }
+        else if(node.getParent().getPair().get(1) == 8) {
             parent_task = "H";
-        }
-
-        // change child tasks to letters
-        if(child.getPair().get(1) == 1) {
-            child_task = "A";
-        }
-        else if(child.getPair().get(1) == 2) {
-            child_task = "B";
-        }
-        else if(child.getPair().get(1) == 3) {
-            child_task = "C";
-        }
-        else if(child.getPair().get(1) == 4) {
-            child_task = "D";
-        }
-        else if(child.getPair().get(1) == 5) {
-            child_task = "E";
-        }
-        else if(child.getPair().get(1) == 6) {
-            child_task = "F";
-        }
-        else if(child.getPair().get(1) == 7) {
-            child_task = "G";
-        }
-        else if(child.getPair().get(1) == 8) {
-            child_task = "H";
         }
 
         // check if parent and child task match invalid pair
         for (int i = 0; i < pairs.size(); i ++) {
             
-            if(parent_task == pairs.get(i).get(0) && child_task == pairs.get(i).get(1)) {
+            if(parent_task.equals(pairs.get(i).get(0)) && node_task.equals(pairs.get(i).get(1))) {
                 return false;
             }
         }
@@ -163,7 +160,7 @@ public class ConstraintHandler {
     }
 
     // Machine penalties
-    public int machinePenalty(Node node, ArrayList<ArrayList<Integer>> pairs){
+    public int machinePenalty(MNode node, ArrayList<ArrayList<Integer>> pairs){
 
         int nodeMachine = node.getPair().get(0);
         int nodeTask = node.getPair().get(1);
@@ -172,7 +169,7 @@ public class ConstraintHandler {
     }
 
     // Too-near penalties
-    public int tooNearPenalties(Node node, ArrayList<ArrayList<String>> TNP) {
+    public int tooNearPenalties(MNode node, ArrayList<ArrayList<String>> TNP) {
 
         String node_task = "";
         String parent_task = "";
@@ -234,7 +231,7 @@ public class ConstraintHandler {
         // find the last penalty for the pair to use
         for(int i = 0; i < TNP.size(); i++) {
 
-            if(parent_task == TNP.get(i).get(0) && node_task == TNP.get(i).get(1)) {
+            if(parent_task.equals(TNP.get(i).get(0)) && node_task.equals(TNP.get(i).get(1))) {
                 index = i;
             }
         }
