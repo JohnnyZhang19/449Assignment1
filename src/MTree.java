@@ -90,6 +90,11 @@ public class MTree {
     }
 
     public String getBest() {
+
+        if(bestPVal == Integer.MAX_VALUE) {
+            return "No valid solution possible!";
+        }
+
         ArrayList<Integer> anc = new ArrayList<Integer>();
         bestTreeLeaf.getAncestry(anc);
 
