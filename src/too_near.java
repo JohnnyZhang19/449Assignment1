@@ -5,10 +5,10 @@ public class too_near {
 
     public boolean too_near_sort(Node node,ArrayList<ArrayList<String>> pairs, Node child) {
 
-        int parent_machine = node.getPair().get(0);
+      //  int parent_machine = node.getPair().get(0);
         String parent_task = "";
 
-        int child_machine = child.getPair().get(0);
+      //  int child_machine = child.getPair().get(0);
         String child_task = "";
        
        // change parent task to letters
